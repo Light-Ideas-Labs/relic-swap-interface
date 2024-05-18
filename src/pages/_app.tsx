@@ -7,16 +7,27 @@ import "@/styles/globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import { Web3Modal } from '@/context/Web3Modal';
 import RootLayout from "@/components/layouts/RootLayout";
+import { ThemeProvider } from "@/components/theme-provider/ThemeProvider";
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Web3Modal>
-      <RainbowKitProvider>
-        <RootLayout>
-          <Component />
-        </RootLayout>
-      </RainbowKitProvider>
-    </Web3Modal>
+    <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange>
+        <QueryClientProvider client={queryClient}>
+          <Web3Modal>
+            <RainbowKitProvider>
+              <RootLayout>
+                <Component />
+              </RootLayout>
+            </RainbowKitProvider>
+            </Web3Modal>
+            </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 

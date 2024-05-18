@@ -5,6 +5,8 @@ import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link"
 
+import { ThemeToggle } from "../theme-provider/ThemeProvider";
+
 
 export default function Header() {
     const menuItems = [
@@ -79,7 +81,9 @@ export default function Header() {
                                             largeScreen: true,
                                         }}
                                     />
+                                    <ThemeToggle />
                             </div>
+
                         </div>
                     </div>
 

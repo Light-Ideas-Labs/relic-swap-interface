@@ -1,4 +1,6 @@
 import { ethers } from "ethers";
+import { readContract } from '@wagmi/core'
+import { wagmiConfig } from '../config/index';
 import { erc20, factory, pair, router} from './abis'
 
 

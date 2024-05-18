@@ -18,7 +18,7 @@ const metadata = {
 
 export const wagmiLiskconfig = getDefaultConfig({
   appName: 'Relic Swap',
-  projectId: projectId, // 'c79c1d1861e6f7871186ea3294158ab1',
+  projectId: projectId, // 'c79c1d1861e6f7871186ea3294158ab1'
   chains: [liskSepolia],
   ssr: true, // If your dApp uses server side rendering (SSR) set this to true
   transports: {
