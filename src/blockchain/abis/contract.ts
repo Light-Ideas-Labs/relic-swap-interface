@@ -1,4 +1,3 @@
-'use client'
 import { ethers } from "ethers";
 import { useReadContract, useWriteContract } from 'wagmi'
 import { Abi } from 'viem';
