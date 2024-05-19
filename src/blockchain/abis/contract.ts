@@ -1,8 +1,35 @@
+'use client'
 import { ethers } from "ethers";
-import { readContract } from '@wagmi/core'
+import { useReadContract, useWriteContract } from 'wagmi'
+import { Abi } from 'viem';
 import { wagmiConfig } from '../config/index';
-import { erc20, factory, pair, router} from './abis'
+import { erc20, factory, pair, router } from './abis'
 
+
+const factoryAddress = '0xd100Cc820e3a50e1803f87757bbDbfae7c7Ab71C'
+const router02Address = '0x54550361D95252f4DC1a1B12a1580aa4D665049A' as `0x${string}`;
+
+export const useContractMethods = () => {
+  const createPairSetup = (tokenA: `0x${string}`, tokenB: `0x${string}`) => {
+    return {
+      address: router02Address,
+      abi: router.abi,
+      functionName: 'createPair',
+      args: [tokenA, tokenB] as const,
+    };
+  };
+
+  const getAllPairsSetup = () => {
+    return {
+      address: router02Address,
+      abi: router.abi,
+      functionName: 'allPairs',
+      args: [] as const, // Include args parameter as empty array
+    };
+  };
+
+  return { createPairSetup, getAllPairsSetup };
+};
 
 interface Token {
     address: string;

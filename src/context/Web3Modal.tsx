@@ -1,6 +1,6 @@
 'use client';
-
 import React, { ReactNode } from 'react';
+import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { wagmiLiskconfig, wagmiConfig, projectId } from '@/blockchain/config';
 import { createWeb3Modal } from '@web3modal/wagmi/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';

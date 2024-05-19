@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CogIcon, ChevronDownIcon, ArrowLeftIcon } from '@heroicons/react/24/solid'; 
+import { useReadContract, useWriteContract } from 'wagmi';
 import Image from "next/image";
 import TokenModal from "../components/modal/TokenListModal";
+import { useContractMethods } from '../blockchain/abis/contract'
+
+
+type EthereumAddress = `0x${string}`;
+
 
 interface AddLiquidityProps {
   // Add any props if needed
@@ -15,19 +21,32 @@ const gradientStyle = {
 const AddLiquidity: React.FC<AddLiquidityProps> = () => {
   const router = useRouter();
 
-  const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
-  const [selectedToken, setSelectedToken] = useState<string | null>(null);
+  const { createPairSetup } = useContractMethods();
 
-  const handleBackToPoolsClick = () => {
-    router.push('/pools');
-  };
+  // Set up the contract write hook
+
+
+  const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
+  const [selectedTokenA, setSelectedTokenA] = useState<string | null>(null);
+  const [selectedTokenB, setSelectedTokenB] = useState<string | null>(null);
+  const [currentTokenSelection, setCurrentTokenSelection] = useState<'A' | 'B'>('A');
 
   //  onSelectToken={handleTokenSelect} 
   
   const toggleTokenModal = () => setIsTokenModalOpen(!isTokenModalOpen);
   const handleTokenSelect = (token: string) => {
-    setSelectedToken(token);
+    if (currentTokenSelection === 'A') {
+      setSelectedTokenA(token);
+    } else {
+      setSelectedTokenB(token);
+    }
     setIsTokenModalOpen(false);
+  };
+
+
+
+  const handleBackToPoolsClick = () => {
+    router.push('/pools');
   };
 
   return (
@@ -61,7 +80,7 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
               width={25} 
               height={25}
             />
-            <span className="ml-2">{selectedToken || "ETH"}</span>
+            <span className="ml-2">ETH</span>
             <ChevronDownIcon className="h-5 w-5 ml-4 text-white" />
           </button>
           <div className="absolute right-0 bottom-0 mb-1 mr-2 text-sm">
@@ -79,7 +98,7 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
             className="bg-transparent flex-grow text-left mr-2 outline-none w-full"
           />
           <button className="flex items-center bg-transparent border border-gray-300 text-white rounded-lg px-4 py-2 w-full max-w-xs" onClick={toggleTokenModal}>
-            <span className="flex-grow text-left">{selectedToken || "Select a token"}</span>
+            <span className="flex-grow text-left">{"Select a token"}</span>
             <ChevronDownIcon className="h-5 w-5 ml-2 text-white" />
           </button>
           <div className="absolute right-0 bottom-0 mb-1 mr-2 text-sm">

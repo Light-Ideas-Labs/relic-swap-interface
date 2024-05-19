@@ -15,7 +15,6 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886'],
 };
 
-
 export const wagmiLiskconfig = getDefaultConfig({
   appName: 'Relic Swap',
   projectId: projectId, // 'c79c1d1861e6f7871186ea3294158ab1'

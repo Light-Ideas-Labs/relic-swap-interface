@@ -90,7 +90,7 @@ const SwapTokensSection: React.FC<SwapSectionProps> = ({ accounts, tokenData}) =
       {/* here */}
         <div className="mt-6 mb-6 bg-gray-900 text-white rounded-xl p-4">
           <label className="block text-white-700 text-sm font-bold mb-2">You pay:</label>
-          <div className="relative p-2 rounded-md">
+          <div className="relative p-2 rounded-md gap-3">
             <input
                type="number" 
                value="0"
