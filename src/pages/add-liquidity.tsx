@@ -6,10 +6,6 @@ import Image from "next/image";
 import TokenModal from "../components/modal/TokenListModal";
 import { useContractMethods } from '../blockchain/abis/contract'
 
-
-type EthereumAddress = `0x${string}`;
-
-
 interface AddLiquidityProps {
   // Add any props if needed
 }
@@ -23,17 +19,26 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
 
   const { createPairSetup } = useContractMethods();
 
-  // Set up the contract write hook
+  console.log(createPairSetup('0x00', '0x00'))
 
 
   const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
-  const [selectedTokenA, setSelectedTokenA] = useState<string | null>(null);
-  const [selectedTokenB, setSelectedTokenB] = useState<string | null>(null);
+  const [selectedTokenA, setSelectedTokenA] = useState<string>('0x00');
+  const [selectedTokenB, setSelectedTokenB] = useState<string>('0x00');
   const [currentTokenSelection, setCurrentTokenSelection] = useState<'A' | 'B'>('A');
+  
+  // Set up the contract write hook
+  const { writeContract, error} = useWriteContract() 
+
+  //  const handlePairAddition =  writeContract()
+
+
+
+
 
   //  onSelectToken={handleTokenSelect} 
-  
   const toggleTokenModal = () => setIsTokenModalOpen(!isTokenModalOpen);
+
   const handleTokenSelect = (token: string) => {
     if (currentTokenSelection === 'A') {
       setSelectedTokenA(token);
