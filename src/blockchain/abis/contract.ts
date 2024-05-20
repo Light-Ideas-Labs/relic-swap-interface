@@ -11,7 +11,7 @@ export const useContractMethods = () => {
   const createPairSetup = (tokenA: string, tokenB: string) => {
     return {
       address: factoryAddress,
-      abi: router.abi,
+      abi: factory.abi,
       functionName: 'createPair',
       args: [tokenA, tokenB] as const,
     };
@@ -20,7 +20,7 @@ export const useContractMethods = () => {
   const getAllPairsSetup = () => {
     return {
       address: factoryAddress,
-      abi: router.abi,
+      abi: factory.abi,
       functionName: 'allPairs',
       args: [] as const, // Include args parameter as empty array
     };
