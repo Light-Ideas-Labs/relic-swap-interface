@@ -28,12 +28,30 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
   const [currentTokenSelection, setCurrentTokenSelection] = useState<'A' | 'B'>('A');
   
   // Set up the contract write hook
-  const { writeContract, error} = useWriteContract() 
+  const { writeContractAsync:writeCreatePair, error} = useWriteContract() 
 
   //  const handlePairAddition =  writeContract()
   
 
+  const handlePairAddition = async () => {
+    try{
+      const createPair = createPairSetup(selectedTokenA,selectedTokenB);
+      const hash = await writeCreatePair({
+        abi:createPair.abi,
+        address:createPair.address,
+        functionName:createPair.functionName,
+        args:createPair.args
+      })
 
+
+
+    }catch(err){
+      console.log("error creating pair tokens");
+
+    }
+
+    
+  }
 
 
 
