@@ -17,7 +17,7 @@ const gradientStyle = {
 const AddLiquidity: React.FC<AddLiquidityProps> = () => {
   const router = useRouter();
 
-  const { createPairSetup } = useContractMethods();
+  const { createPairSetup,getFeeToSetter } = useContractMethods();
 
   console.log(createPairSetup('0x00', '0x00'))
 

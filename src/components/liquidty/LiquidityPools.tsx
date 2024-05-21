@@ -32,6 +32,12 @@ const LiquidityPools: React.FC = () => {
     address:allPairsConfig.address,
     args:allPairsConfig.args
   });
+  const { data: pairss, isError:er, isLoading:ld } = useReadContract({
+    abi: allPairsConfig.abi,
+    functionName:allPairsConfig.functionName,
+    address:allPairsConfig.address,
+    args:allPairsConfig.args
+  });
   
   // Log the data, error, and loading state
   console.log('Pairs Data:', pairs);
