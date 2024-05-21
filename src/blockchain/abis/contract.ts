@@ -3,9 +3,10 @@ import { useReadContract, useWriteContract } from 'wagmi'
 import { wagmiConfig } from '../config/index';
 import { erc20, factory, pair, router } from './abis'
 
+type Address = `0x${string}`;
 
-const factoryAddress = '0xd100Cc820e3a50e1803f87757bbDbfae7c7Ab71C'
-const router02Address = '0x54550361D95252f4DC1a1B12a1580aa4D665049A' as string;
+const factoryAddress: Address = '0xd100Cc820e3a50e1803f87757bbDbfae7c7Ab71C' ;
+const router02Address: Address = '0x54550361D95252f4DC1a1B12a1580aa4D665049A' ;
 
 export const useContractMethods = () => {
   const createPairSetup = (tokenA: string, tokenB: string) => {
