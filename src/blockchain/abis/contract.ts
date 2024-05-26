@@ -9,50 +9,50 @@ const factoryAddress: Address = '0xd100Cc820e3a50e1803f87757bbDbfae7c7Ab71C' ;
 const router02Address: Address = '0x54550361D95252f4DC1a1B12a1580aa4D665049A' ;
 
 export const useContractMethods = () => {
-    //factory methods write
-  const createPairSetup = (tokenA: string, tokenB: string) => {
-    return {
-      address: factoryAddress,
-      abi: factory.abi,
-      functionName: 'createPair',
-      args: [tokenA, tokenB] as const,
+    // factory methods write
+    const createPairSetup = (tokenA: string, tokenB: string) => {
+        return {
+            address: factoryAddress,
+            abi: factory.abi,
+            functionName: 'createPair',
+            args: [tokenA, tokenB] as const,
+        };
     };
-  };
-  const setAddressFeeTo =(address:string)=>{
-    return {
-        address: factoryAddress,
-        abi: factory.abi,
-        functionName: 'setFeeTo',
-        args: [address] as const,
-    }    
-
-  }
-
-  const setAddressFeeToSetter =(address:string)=>{
-    return {
-        address: factoryAddress,
-        abi: factory.abi,
-        functionName: 'setFeeToSetter',
-        args: [address] as const,
-    }    
-
-  }
-
-  //factory read contract methods
-  const getAllPairsSetup = () => {
-    return {
-      address: factoryAddress,
-      abi: factory.abi,
-      functionName: 'allPairs',
-      args: [] as const, // Include args parameter as empty array
+    
+    const setAddressFeeTo =(address:string)=>{
+        return {
+            address: factoryAddress,
+            abi: factory.abi,
+            functionName: 'setFeeTo',
+            args: [address] as const,
+        }
+    }
+    
+    const setAddressFeeToSetter =(address:string)=>{
+        return {
+           address: factoryAddress,
+           abi: factory.abi,
+           functionName: 'setFeeToSetter',
+           args: [address] as const,
+        }
+    }
+    
+    // factory read contract methods
+    const getAllPairsSetup = () => {
+        return {
+            address: factoryAddress,
+            abi: factory.abi,
+            functionName: 'allPairs',
+            args: [] as const, // Include args parameter as empty array
+        };
     };
-  };
-  const getAllPairsLength = () => {
-    return {
-      address: factoryAddress,
-      abi: factory.abi,
-      functionName: 'allPairsLength',
-      args: [] as const, // Include args parameter as empty array
+    
+    const getAllPairsLength = () => {
+        return {
+            address: factoryAddress,
+            abi: factory.abi,
+            functionName: 'allPairsLength',
+            args: [] as const, // Include args parameter as empty array
     };
   };
   const getFeeTo =()=>{
@@ -92,14 +92,17 @@ export const useContractMethods = () => {
 
   
 
-  return { createPairSetup,
-     getAllPairsSetup,setAddressFeeTo,
+  return { 
+    createPairSetup,
+    getAllPairsSetup,
+    setAddressFeeTo,
     getFeeToSetter,
     getAllPairsLength,
     getCreatePair,
     getTokensPair,
     getFeeTo,
-setAddressFeeToSetter };
+    setAddressFeeToSetter 
+};
 };
 
 

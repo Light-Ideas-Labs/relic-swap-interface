@@ -17,7 +17,7 @@ const gradientStyle = {
 const AddLiquidity: React.FC<AddLiquidityProps> = () => {
   const router = useRouter();
 
-  const { createPairSetup,getFeeToSetter } = useContractMethods();
+  const { createPairSetup, getFeeToSetter } = useContractMethods();
 
   console.log(createPairSetup('0x00', '0x00'))
 
@@ -35,7 +35,7 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
 
   const handlePairAddition = async () => {
     try{
-      const createPair = createPairSetup(selectedTokenA,selectedTokenB);
+      const createPair = createPairSetup(selectedTokenA, selectedTokenB);
       const hash = await writeCreatePair({
         abi:createPair.abi,
         address:createPair.address,
@@ -43,10 +43,11 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
         args:createPair.args
       })
 
-
+      console.log("hash", hash)
 
     }catch(err){
       console.log("error creating pair tokens");
+      console.log("error", err)
 
     }
 
@@ -97,7 +98,7 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
             defaultValue="0"
             className="bg-transparent flex-grow text-left mr-2 outline-none w-full"
           />
-          <button className="inset-y-0 flex items-center bg-transparent border border-gray-300 text-white rounded-lg px-3 py-2 w-full max-w-xs" style={gradientStyle} onClick={toggleTokenModal}>
+          <button className="inset-y-0 flex items-center bg-transparent border border-gray-300 text-white rounded-lg px-3 py-2 w-full max-w-xs" style={gradientStyle} onClick={() => {toggleTokenModal; setCurrentTokenSelection('A'); }}>
             <Image 
               src="/ether.png"
               alt="icon token"
@@ -121,8 +122,8 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
             defaultValue="0"
             className="bg-transparent flex-grow text-left mr-2 outline-none w-full"
           />
-          <button className="flex items-center bg-transparent border border-gray-300 text-white rounded-lg px-4 py-2 w-full max-w-xs" onClick={toggleTokenModal}>
-            <span className="flex-grow text-left">{"Select a token"}</span>
+          <button className="flex items-center bg-transparent border border-gray-300 text-white rounded-lg px-4 py-2 w-full max-w-xs" onClick={() => {toggleTokenModal; setCurrentTokenSelection('B'); }}>
+            <span className="flex-grow text-left">{selectedTokenB === '0x00' ? "Select a token" : selectedTokenB}</span>
             <ChevronDownIcon className="h-5 w-5 ml-2 text-white" />
           </button>
           <div className="absolute right-0 bottom-0 mb-1 mr-2 text-sm">
@@ -130,10 +131,22 @@ const AddLiquidity: React.FC<AddLiquidityProps> = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 p-4 rounded-lg text-center">
-        <p className="text-gray-900">Invalid pair</p>
-      </div>
+      {selectedTokenA !== '0x00' && selectedTokenB !== '0x00' && selectedTokenA !== selectedTokenB ? (
+        <div className="bg-gray-100 p-4 rounded-lg text-center">
+          <p className="text-gray-900">Initial prices and pool share</p>
+          <p className="text-gray-900">- DAI per UBN</p>
+          <p className="text-gray-900">- UBN per DAI</p>
+          <p className="text-gray-900">0% Share of pool</p>
+        </div>
+      ) : (
+        <div className="bg-gray-100 p-4 rounded-lg text-center">
+          <p className="text-gray-900">{selectedTokenA === selectedTokenB ? "Invalid pair" : "Enter an amount"}</p>
+        </div>
+      )}
       <TokenModal isOpen={isTokenModalOpen} onClose={toggleTokenModal} /> 
+      <button onClick={handlePairAddition} className="mt-4 bg-blue-500 text-white p-2 rounded-lg w-full">
+        Add Liquidity
+      </button>
     </div>
   );
 };
